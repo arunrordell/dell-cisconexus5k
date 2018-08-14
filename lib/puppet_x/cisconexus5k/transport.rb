@@ -547,6 +547,7 @@ class PuppetX::Cisconexus5k::Transport
         return
       elsif resource[:removeallassociatedvlans] == "true"
         execute("no channel-group")
+        execute("no interface #{is[:port_channel]}")
       end
     end
 
