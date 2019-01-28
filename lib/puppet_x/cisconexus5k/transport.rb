@@ -429,6 +429,11 @@ class PuppetX::Cisconexus5k::Transport
         raise "The VLAN id value/range is invalid."
       end
       execute("exit")
+
+      require 'pry'
+      binding.pry
+      Puppet.info "Saving running-config to start-up config"
+      execute("copy running-config startup-config")
       return
     end
 
@@ -525,6 +530,11 @@ class PuppetX::Cisconexus5k::Transport
       execute("exit")
     else
       configure_interface_port(resource, is, should, interface_id, is_native, native_vlan_id)
+    end
+
+    if resource[:save_start_up_config] && resource[:save_start_up_config] == "true"
+      Puppet.info "Saving running-config to start-up config"
+      execute("copy running-config startup-config")
     end
   end
 

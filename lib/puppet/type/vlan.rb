@@ -204,4 +204,8 @@ Puppet::Type.newtype(:vlan) do
     end
   end
 
+  newproperty(:save_start_up_config) do
+    desc "Encapsulationtype for portchannel."
+    defaultto "true"
+    end
 end
